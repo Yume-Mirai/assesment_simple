@@ -1,0 +1,10 @@
+version: '3.8'
+
+services:
+  serial-app:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    volumes:
+      - .:/app
+    command: sh -c "./start-dev.sh"

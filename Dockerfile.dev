@@ -1,0 +1,7 @@
+FROM golang:1.23
+
+WORKDIR /app
+
+# Install required tools
+RUN apt-get update && apt-get install -y socat
+RUN go install github.com/air-verse/air@latest
