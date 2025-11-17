@@ -20,30 +20,40 @@ func NewCircularQueue(capacity int) *CircularQueue {
 
 // Enqueue adds an element to the rear of the queue
 func (q *CircularQueue) Enqueue(value int) bool {
-	// TODO: Implement
+	if q.IsFull() {
+		return false
+	}
+	q.items[q.rear] = value
+	q.rear = (q.rear + 1) % len(q.items)
+	q.size++
 	return true
 }
 
 // Dequeue removes and returns the front element from the queue
 func (q *CircularQueue) Dequeue() (int, bool) {
-	// TODO: Implement
-	return 0, true
+	if q.IsEmpty() {
+		return 0, false
+	}
+	value := q.items[q.front]
+	q.front = (q.front + 1) % len(q.items)
+	q.size--
+	return value, true
 }
 
 // Peek returns the front element without removing it
 func (q *CircularQueue) Peek() (int, bool) {
-	// TODO: Implement
-	return 0, true
+	if q.IsEmpty() {
+		return 0, false
+	}
+	return q.items[q.front], true
 }
 
 // IsEmpty returns true if the queue is empty
 func (q *CircularQueue) IsEmpty() bool {
-	// TODO: Implement
-	return false
+	return q.size == 0
 }
 
 // IsFull returns true if the queue is full
 func (q *CircularQueue) IsFull() bool {
-	// TODO: Implement
-	return false
+	return q.size == len(q.items)
 }
